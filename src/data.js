@@ -28,7 +28,7 @@ export const links = [
   },
   {
     id: 5,
-    
+    url: "#",
     text: "Trash",
     icon: <i class="fa fa-fw fa-trash"></i>,
   },

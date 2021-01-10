@@ -20,17 +20,17 @@ const adder=(id)=>{
        <div className="">
            
            <h1>TRASH</h1>
-           {removed.length!==0?<button  style={{ backgroundColor:"red" ,borderRadius:"10%" }} onClick={() =>setRemoved([])}>Clear All</button>:""}
+           {removed.length!==0?<button  onClick={() =>setRemoved([])}>Clear All</button>:""}
            {removed.map((remove)=>{
                
                return(
-                <div style={{ backgroundColor: `${remove.col}`,marginTop:"10px",display:"block" }}>
+                <div style={{ marginTop:"10px",display:"block" }}>
                 <input
                     type="text"
                     
                     //className="item"
                     value={remove.item}
-                    style={{marginRight:"3px"}}
+                    style={{backgroundColor: `${remove.col}`,marginRight:"3px"}}
                     className="item btn del-item"
                 />
                   <i  onClick={() =>adder(remove.id)} className="fa fa-cog"></i>
