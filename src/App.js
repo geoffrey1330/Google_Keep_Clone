@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 import Item from "./Item";
+import Delete from "./delete";
+// import Edit from "./edit";
 import { v4 as uuidv4 } from "uuid";
 import "./components/Header.css";
 import color from "./color";
@@ -13,14 +15,23 @@ const arr = () => {
   else return [];
 };
 
+const arr2 = () => {
+  let data2 = localStorage.getItem("data2");
+  if (data2) return JSON.parse(localStorage.getItem("data2"));
+  else return [];
+};
+
 function App() {
   const [item, setItem] = useState("");
   const [title, setTitle] = useState("");
   const [show, setShow] = useState(false);
+  const [trash, setTrash] = useState(false);
+  const [edit,setEdit]=useState(false)
   const [showbar, setShowbar] = useState(false);
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const [list, setList] = useState(arr);
+  const[remove,setRemove]=useState(arr2);
   const [inputList] = useState([{ title: "", todo: "" }]);
   const [col, setCol] = useState("");
 
@@ -35,6 +46,7 @@ function App() {
     e.preventDefault();
     if (item) {
       setList([...list, newItem]);
+      console.log(list);
       setTitle("");
       setItem("");
       setCol("");
@@ -44,7 +56,8 @@ function App() {
 
   React.useEffect(() => {
     localStorage.setItem("data", JSON.stringify(list));
-  }, [list]);
+    localStorage.setItem("data2", JSON.stringify(remove));
+  }, [list,remove]);
 
   const handleChange = (e) => {
     setItem(e.target.value);
@@ -68,12 +81,26 @@ function App() {
         search={search}
         setShowbar={setShowbar}
         showbar={showbar}
+        trash={trash}
+        setTrash={setTrash}
+        edit={edit}
+        setEdit={setEdit}
       />
+      {trash &&
+      <Delete
+      removed={remove}
+      setRemoved={setRemove}
+      col={col}
+      list={list}
+      setList={setList}
+      />}      
+
       <Modal />
+      {!trash &&
       <form onSubmit={handleSubmit}>
         {!toggle ? (
           <input
-            className="form-container "
+            className="form-container"
             onClick={() => setToggle(!toggle)}
             placeholder="Take a note..."
             type="text"
@@ -159,9 +186,11 @@ function App() {
             })}
           </div>
         )}
-      </form>
+      </form>}
       <br></br>
+      {!trash &&
       <div>
+      
         {filterTodos.map((c, id) => (
           <Item
             key={id}
@@ -172,9 +201,29 @@ function App() {
             col={c.col}
             title={c.title}
             show1={c.show1}
+            removed={remove}
+            setRemoved={setRemove}
           />
         ))}
-      </div>
+      </div>}
+      {/* {!edit &&
+      <div>
+        {filterTodos.map((c, id) => (
+          <Edit
+            key={id}
+            id={c.id}
+            item={c.item}
+            list={list}
+            setList={setList}
+            col={c.col}
+            title={c.title}
+            show1={c.show1}
+            removed={remove}
+            setRemoved={setRemove}
+          />
+        ))}
+      </div>} */}
+
     </div>
   );
 }

@@ -5,6 +5,7 @@ export const links = [
     id: 1,
     url: "/",
     text: "Notes",
+    icon: <i class="fa fa-home"></i>,
   },
   
   {
@@ -27,7 +28,7 @@ export const links = [
   },
   {
     id: 5,
-
+    
     text: "Trash",
     icon: <i class="fa fa-fw fa-trash"></i>,
   },

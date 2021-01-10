@@ -4,11 +4,17 @@ import color from "./color";
 import { useGlobalContext } from "./context";
 import "./App.css";
 
-const Item = ({ id, item, list, setList, col, title, show1 }) => {
+const Item = ({ id, item, list, setList, col, title, show1, removed,setRemoved }) => {
   const { openModal } = useGlobalContext();
 
   const remove = (id) => {
     setList(list.filter((el) => el.id !== id));
+    const newDel=list.filter((el) => el.id === id);
+    // const newDel={...newDe};
+    /*const newDel={id:"hgghghghg",item:"meat"}*/
+    console.log(...newDel);
+    setRemoved([...newDel,...removed]);
+   
   };
 
   const handleItem = (e) => {

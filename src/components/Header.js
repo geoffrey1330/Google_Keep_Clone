@@ -3,7 +3,7 @@ import "./Header.css";
 import "../App.css";
 import { links } from "../data";
 
-const Header = ({ onSearchChange, search, showbar, setShowbar }) => {
+const Header = ({ onSearchChange, search, showbar, setShowbar,trash,setTrash,edit,setEdit }) => {
   return (
     <div>
       <ul>
@@ -44,6 +44,30 @@ const Header = ({ onSearchChange, search, showbar, setShowbar }) => {
           <ul className="links">
             {links.map((link) => {
               const { id, url, text, icon } = link;
+              if(id===5){
+                return (
+                  <li key={id}>
+                    
+                    <a href={url} onClick={() => setTrash(!trash)} >
+                    <a href={url} onClick={() => setEdit(true)} ></a>
+                   
+                      {icon}
+                      {text}
+                    </a>
+                  </li>
+                );
+              }
+
+              if(id===3){
+                return (
+                  <li key={id}>
+                    <a href={url} onClick={() => setEdit(!edit)}>
+                      {icon}
+                      {text}
+                    </a>
+                  </li>
+                );
+              }
               return (
                 <li key={id}>
                   <a href={url}>
@@ -61,6 +85,15 @@ const Header = ({ onSearchChange, search, showbar, setShowbar }) => {
           <ul className="links">
             {links.map((link) => {
               const { id, url, icon } = link;
+              if(id===5){
+                return (
+                  <li key={id}>
+                    <a href={url} onClick={() => setTrash(!trash)}>
+                      {icon}
+                    </a>
+                  </li>
+                );
+              }
               return (
                 <li key={id}>
                   <a href={url}>{icon}</a>
