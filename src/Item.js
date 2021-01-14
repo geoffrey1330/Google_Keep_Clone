@@ -64,17 +64,41 @@ const Item = ({ id, item, list, setList, col, title, show1, removed,setRemoved }
   };
 
   return (
-    <div>
-      <input
+    <div >
+      <div
+      type="text"
+      style={{ backgroundColor: `${col}` }}
+      //className="item"
+     
+      onChange={handleItem}
+      onClick={openModal}
+     
+      className="item btn"
+      >
+        <h3>{title}</h3>
+        
+        <input
+        type="text"
+        style={{ backgroundColor: `${col}`,border:"0px solid",textAlign:"center", textTransform: "uppercase" }}
+        //className="item"
+        value={item}
+        onChange={handleItem}
+        onClick={openModal}
+        className=""
+        
+      />
+      </div>
+      {/* <input
         type="text"
         style={{ backgroundColor: `${col}` }}
         //className="item"
         value={item}
         onChange={handleItem}
         onClick={openModal}
+       
         className="item btn"
-      />
-
+      /> */}
+     
       <i onClick={handleShow} className="fa fa-paint-brush"></i>
       {show1 && (
         <div className="cart-dropdown">
